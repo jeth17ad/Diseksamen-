@@ -141,7 +141,7 @@ public class UserController {
       dbCon = new DatabaseController();
     }
 
-    String sql = "Delete FROM user WHERE id =" + id;
+    String sql = " Delete FROM user WHERE id = " + id;
 
     dbCon.deleteUser(sql);
 
