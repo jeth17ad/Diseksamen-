@@ -33,12 +33,12 @@ public class UserController {
       // Get first object, since we only have one
       if (rs.next()) {
         user =
-            new User(
-                rs.getInt("id"),
-                rs.getString("first_name"),
-                rs.getString("last_name"),
-                rs.getString("password"),
-                rs.getString("email"));
+                new User(
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("password"),
+                        rs.getString("email"));
 
         // return the create object
         return user;
@@ -76,12 +76,12 @@ public class UserController {
       // Loop through DB Data
       while (rs.next()) {
         User user =
-            new User(
-                rs.getInt("id"),
-                rs.getString("first_name"),
-                rs.getString("last_name"),
-                rs.getString("password"),
-                rs.getString("email"));
+                new User(
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("password"),
+                        rs.getString("email"));
 
         // Add element to list
         users.add(user);
@@ -110,22 +110,22 @@ public class UserController {
     // Insert the user in the DB
     // TODO: Hash the user password before saving it. : FIX
     int userID = dbCon.insert(
-        "INSERT INTO user(first_name, last_name, password, email, created_at) VALUES('"
-            + user.getFirstname()
-            + "', '"
-            + user.getLastname()
-            + "', '"
-            + Hashing.md5(user.getPassword())
-            + "', '"
-            + user.getEmail()
-            + "', "
-            + user.getCreatedTime()
-            + ")");
+            "INSERT INTO user(first_name, last_name, password, email, created_at) VALUES('"
+                    + user.getFirstname()
+                    + "', '"
+                    + user.getLastname()
+                    + "', '"
+                    + Hashing.md5(user.getPassword())
+                    + "', '"
+                    + user.getEmail()
+                    + "', "
+                    + user.getCreatedTime()
+                    + ")");
 
     if (userID != 0) {
       //Update the userid of the user before returning
       user.setId(userID);
-    } else{
+    } else {
       // Return null if user has not been inserted into database
       return null;
     }
@@ -134,48 +134,23 @@ public class UserController {
     return user;
   }
 
-  public static User deleteUser(int id) {
+  public static void deleteUser(int id) {
 
-    // Check for connection
+    //Check for DB Connection
     if (dbCon == null) {
       dbCon = new DatabaseController();
     }
 
-    // Build the query for DB - forespørgsel om at slette en bruger
+    String sql = "Delete FROM user WHERE id =" + id;
 
-    String sql = "delete FROM user where id=" + id;
+    dbCon.deleteUser(sql);
 
-    // Actually do the query
-    ResultSet rs = dbCon.query(sql);
-    User user = null;
 
-    try {
-      // Get first object, since we only have one
-      if (rs.next()) {
-        user =
-                new User(
-                        rs.getInt("id"),
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("password"),
-                        rs.getString("email"));
 
-        // return the create object
-        return user;
-      } else {
-        System.out.println("No user found");
-      }
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
+
     }
 
-    // Return null
-    return user;
   }
 
 
 
-
-
-
-}
