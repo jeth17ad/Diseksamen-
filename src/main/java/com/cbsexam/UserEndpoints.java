@@ -94,8 +94,8 @@ public class UserEndpoints {
   // TODO: Make the system able to delete users
   public Response deleteUser(String x) {
 
-    // Return a response with status 200 and JSON as type
-    return Response.status(400).entity("Endpoint not implemented yet").build();
+    //return a response with status 200 and json as type
+    return Response.status(400).entity("endpoint not implemented yet").build();
   }
 
   // TODO: Make the system able to update users
@@ -103,5 +103,8 @@ public class UserEndpoints {
 
     // Return a response with status 200 and JSON as type
     return Response.status(400).entity("Endpoint not implemented yet").build();
+
   }
+
 }
+
