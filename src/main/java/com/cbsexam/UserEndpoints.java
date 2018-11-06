@@ -28,6 +28,7 @@ public class UserEndpoints {
     // Use the ID to get the user from the controller.
     User user = UserController.getUser(idUser);
 
+
     // TODO: Add Encryption to JSON : FIX
     // Convert the user object to json in order to return the object
     String json = new Gson().toJson(user);
