@@ -36,8 +36,9 @@ public class ProductEndpoints {
     // Return a response with status 200 and JSON as type
     return Response.status(200).type(MediaType.TEXT_PLAIN_TYPE).entity(json).build();
   }
+// kalder metoden productcache
 
-  ProductCache productCache = new ProductCache();
+  private static ProductCache productCache = new ProductCache();
 
   /** @return Responses */
   @GET
@@ -45,6 +46,7 @@ public class ProductEndpoints {
   public Response getProducts() {
 
     // Call our controller-layer in order to get the order from the DB
+    //her bliver den nye cachemetode så anvendt
     ArrayList<Product> products = productCache.getProducts(false);
 
     // TODO: Add Encryption to JSON : FIX

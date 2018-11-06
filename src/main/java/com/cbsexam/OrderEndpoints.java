@@ -1,5 +1,6 @@
 package com.cbsexam;
 
+import cache.OrderCache;
 import com.google.gson.Gson;
 import controllers.OrderController;
 import java.util.ArrayList;
@@ -35,6 +36,9 @@ public class OrderEndpoints {
     // Return a response with status 200 and JSON as type
     return Response.status(200).type(MediaType.APPLICATION_JSON).entity(json).build();
   }
+//metoden ordercache laves her
+
+  public static OrderCache orderCache = new OrderCache();
 
   /** @return Responses */
   @GET

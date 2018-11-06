@@ -1,5 +1,7 @@
 package com.cbsexam;
 
+import cache.ProductCache;
+import cache.UserCache;
 import com.google.gson.Gson;
 import controllers.UserController;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import utils.Log;
 
 @Path("user")
 public class UserEndpoints {
+
 
   /**
    * @param idUser
@@ -38,6 +41,8 @@ public class UserEndpoints {
     // TODO: What should happen if something breaks down?
     return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(json).build();
   }
+  // kalder metoden userCache
+  private static UserCache userCache = new UserCache();
 
   /** @return Responses */
   @GET
@@ -48,7 +53,9 @@ public class UserEndpoints {
     Log.writeLog(this.getClass().getName(), this, "Get all users", 0);
 
     // Get a list of users
-    ArrayList<User> users = UserController.getUsers();
+
+    // redigeret her
+    ArrayList<User> users = userCache.getUsers(false);
 
     // TODO: Add Encryption to JSON : FIX
     // Transfer users to json in order to return it to the user
