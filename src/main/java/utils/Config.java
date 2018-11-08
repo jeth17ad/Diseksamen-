@@ -28,9 +28,7 @@ public final class Config {
   public static long getProductTtl() {
     return PRODUCT_TTL;
   }
-  public static long getOrderTtl(){
-    return ORDER_TTL;
-  }
+  public static long getOrderTtl(){ return ORDER_TTL; }
   public static long getUserTtl(){
     return USER_TTL;
   }
