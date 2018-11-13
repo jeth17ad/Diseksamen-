@@ -25,13 +25,13 @@ public class DatabaseController {
     try {
       // Set the dataabase connect with the data from the config
       String url =
-          "jdbc:mysql://"
-              + Config.getDatabaseHost()
-              + ":"
-              + Config.getDatabasePort()
-              + "/"
-              + Config.getDatabaseName()
-              + "?serverTimezone=CET";
+              "jdbc:mysql://"
+                      + Config.getDatabaseHost()
+                      + ":"
+                      + Config.getDatabasePort()
+                      + "/"
+                      + Config.getDatabaseName()
+                      + "?serverTimezone=CET";
 
       String user = Config.getDatabaseUsername();
       String password = Config.getDatabasePassword();
@@ -93,7 +93,7 @@ public class DatabaseController {
     try {
       // Build the statement up in a safe way
       PreparedStatement statement =
-          connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+              connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
       // Execute query
       result = statement.executeUpdate();
@@ -110,16 +110,47 @@ public class DatabaseController {
     // Return the resultset which at this point will be null
     return result;
   }
-  public void deleteUser (String sql){
+
+  public boolean deleteUser(String sql) {
     if (connection == null)
-      connection=getConnection();
+      connection = getConnection();
+
+    try {
+      PreparedStatement statement = connection.prepareStatement(sql);
+      statement.executeUpdate();
+      return true;
+
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+
+    }
+    return false;
+  }
+
+  public void userLogin(String sql) {
+    if (connection == null)
+      connection = getConnection();
 
     try {
       PreparedStatement statement = connection.prepareStatement(sql);
       statement.executeUpdate();
 
-    } catch (SQLException e){
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  //Opretter UpdateUser her
+  public void updateUser(String sql) {
+    if (connection == null)
+      connection = getConnection();
+
+    try {
+      PreparedStatement statement = connection.prepareStatement(sql);
+      statement.executeUpdate();
+
+    } catch (SQLException e) {
       System.out.println(e.getMessage());
     }
   }
 }
+

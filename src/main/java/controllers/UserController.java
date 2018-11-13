@@ -1,11 +1,18 @@
 package controllers;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import model.User;
 import utils.Hashing;
 import utils.Log;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserController {
 
@@ -134,23 +141,101 @@ public class UserController {
     return user;
   }
 
-  public static void deleteUser(int id) {
+  public static boolean deleteUser(String token) {
+
+    // Check for DB Connection
+    if (dbCon == null) {
+      dbCon = new DatabaseController();
+    }
+
+    DecodedJWT jwt = null;
+    try {
+      Algorithm algorithm = Algorithm.HMAC256("secret");
+      JWTVerifier verifier = JWT.require(algorithm)
+              .withIssuer("auth0")
+              .build(); //Reusable verifier instance
+      jwt = verifier.verify(token);
+    } catch (JWTVerificationException exception) {
+      //Invalid signature/claims
+    }
+
+     String sql = "DELETE FROM user WHERE id = " + jwt.getClaim("userid").asInt();
+
+    return dbCon.deleteUser(sql);
+
+  }
+
+  public static String loginUser(User user) {
+
+    // Check for DB Connection
+    if (dbCon == null) {
+      dbCon = new DatabaseController();
+    }
+
+    String sql = "SELECT * FROM user where email='" + user.getEmail() + "'AND password ='" + user.getPassword() + "'";
+
+    dbCon.userLogin(sql);
+
+    // Actually do the query
+    ResultSet resultSet = dbCon.query(sql);
+    User userlogin;
+    String token = null;
+
+    try {
+      // Get first object, since we only have one
+      if (resultSet.next()) {
+        userlogin =
+                new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("password"),
+                        resultSet.getString("email"));
+
+        if (userlogin != null) {
+          try {
+            Algorithm algorithm = Algorithm.HMAC256("secret");
+            token = JWT.create()
+                    .withClaim("userid", userlogin.getId())
+                    .withIssuer("auth0")
+                    .sign(algorithm);
+          } catch (JWTCreationException exception) {
+            //Invalid Signing configuration / Couldn't convert Claims.
+            System.out.println(exception.getMessage());
+          } finally {
+            return token;
+          }
+        }
+      } else {
+        System.out.println("No user found");
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+
+    // Return null
+    return "";
+
+  }
+
+  public static boolean updateUser(String token) {
 
     //Check for DB Connection
     if (dbCon == null) {
       dbCon = new DatabaseController();
     }
 
-    String sql = " Delete FROM user WHERE id = " + id;
+    String sql = " SELECT FROM user WHERE id = " + token;
 
-    dbCon.deleteUser(sql);
-
-
-
-
-    }
-
+    dbCon.updateUser(sql);
+    return false;
   }
+
+
+
+}
+
+
 
 
 

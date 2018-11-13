@@ -5,11 +5,7 @@ import cache.UserCache;
 import com.google.gson.Gson;
 import controllers.UserController;
 import java.util.ArrayList;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.User;
@@ -39,17 +35,19 @@ public class UserEndpoints {
 
     // Return the user with the status code 200
     // TODO: What should happen if something breaks down? :FIX
-    if (user!= null) {
-     return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(json).build();
-    }
-    else {
+    if (user != null) {
+      return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(json).build();
+    } else {
       return Response.status(400).entity("Could not create user").build();
     }
   }
+
   // kalder metoden userCache
   private static UserCache userCache = new UserCache();
 
-  /** @return Responses */
+  /**
+   * @return Responses
+   */
   @GET
   @Path("/")
   public Response getUsers() {
@@ -94,41 +92,65 @@ public class UserEndpoints {
     }
   }
 
-  // TODO: Make the system able to login users and assign them a token to use throughout the system.
+  // TODO: Make the system able to login users and assign them a token to use throughout the system. : Skal lige testes. muligvis færdg
   @POST
   @Path("/login")
   @Consumes(MediaType.APPLICATION_JSON)
-  public Response loginUser(String x) {
+  public Response loginUser(String body) {
 
-    // Return a response with status 200 and JSON as type
-    return Response.status(400).entity("Endpoint not implemented yet").build();
-  }
 
-  //  TODO: Make the system able to delete users : FIX
-  @POST
-  @Path("delete/{delete}")
-  public Response deleteUser(@PathParam("delete") int idToDelete) {
+    // Read the json from body and transfer it to a user class
+    User user = new Gson().fromJson(body, User.class);
 
-    UserController.deleteUser(idToDelete);
+    // Get the user back with the added ID and return it to the user
+    String token = UserController.loginUser(user);
 
-    //return the data to the user
-    if (idToDelete!= 0) {
-      //return a response with status 200 and json as type
-      return Response.status(200).entity("brugeren med id " + idToDelete + " er nu slettet").build();
+    /// Return the data to the user
+    if (token != "") {
+      // Return a response with status 200 and JSON as type
+      return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(token).build();
     } else {
-      return Response.status(400).entity("brugeren kan ikke oprettes").build();
+      return Response.status(400).entity("Could not create user").build();
     }
   }
 
+  // TODO: Make the system able to delete users (FIXED)
 
+  @DELETE
+  @Path("/delete")
+  public Response deleteUser(String body) {
 
-  // TODO: Make the system able to update users
-  public Response updateUser(String x) {
+    User user = new Gson().fromJson(body, User.class);
 
-    // Return a response with status 200 and JSON as type
-    return Response.status(400).entity("Endpoint not implemented yet").build();
+    // Return the data to the user
+    if (UserController.deleteUser(user.getToken())) {
+
+      // Return a response with status 200 and JSON as type
+      return Response.status(200).entity("Bruger er slettet fra systemet").build();
+    } else {
+      // Return a response with status 200 and JSON as type
+      return Response.status(400).entity("Brugeren kan ikke findes i systemet").build();
+    }
 
   }
 
+  // TODO: Make the system able to update users
+  @POST
+  @Path("/update")
+
+  public Response updateUser(String token) {
+
+    if (UserController.updateUser (token)) {
+
+    return Response.status(200).entity("Brugeren med id ").build();
+
+  } else {
+
+    return Response.status(400).entity(" Oplysningerne kunne ikke opdateres").build();
+
+  }
 }
+}
+
+
 

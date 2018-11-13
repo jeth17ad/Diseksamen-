@@ -117,6 +117,7 @@ public static ProductCache productCache = new ProductCache();
                 rs.getInt("stock"));
 
         products.add(product);
+
       }
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
