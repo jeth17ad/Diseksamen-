@@ -139,18 +139,23 @@ public class DatabaseController {
       System.out.println(e.getMessage());
     }
   }
+
   //Opretter UpdateUser her
-  public void updateUser(String sql) {
+  public boolean updateUser(String sql) {
+
     if (connection == null)
       connection = getConnection();
 
     try {
       PreparedStatement statement = connection.prepareStatement(sql);
       statement.executeUpdate();
+      return true;
 
-    } catch (SQLException e) {
-      System.out.println(e.getMessage());
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
     }
+    return false;
+
   }
 }
 

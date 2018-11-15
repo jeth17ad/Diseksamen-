@@ -99,7 +99,7 @@ public static ProductCache productCache = new ProductCache();
       dbCon = new DatabaseController();
     }
 
-    // TODO: Use caching layer. :FIX
+    // TODO: Use caching layer. :FIXED
     String sql = "SELECT * FROM product";
 
     ResultSet rs = dbCon.query(sql);

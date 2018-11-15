@@ -7,6 +7,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import model.User;
+import sun.jvm.hotspot.code.Location;
 import utils.Hashing;
 import utils.Log;
 
@@ -115,7 +116,7 @@ public class UserController {
     }
 
     // Insert the user in the DB
-    // TODO: Hash the user password before saving it. : FIX
+    // TODO: Hash the user password before saving it. : FIXED
     int userID = dbCon.insert(
             "INSERT INTO user(first_name, last_name, password, email, created_at) VALUES('"
                     + user.getFirstname()
@@ -218,21 +219,33 @@ public class UserController {
 
   }
 
-  public static boolean updateUser(String token) {
+  public static boolean updateUser(User user, String token) {
 
-    //Check for DB Connection
+    Hashing hashing = new Hashing();
+
+    // Check for DB Connection
     if (dbCon == null) {
       dbCon = new DatabaseController();
     }
 
-    String sql = " SELECT FROM user WHERE id = " + token;
+    DecodedJWT jwt = null;
+    try {
+      Algorithm algorithm = Algorithm.HMAC256("secret");
+      JWTVerifier verifier = JWT.require(algorithm)
+              .withIssuer("auth0")
+              .build(); //Reusable verifier instance
+      jwt = verifier.verify(token);
+    } catch (JWTVerificationException exception) {
+      //Invalid signature/claims
+    }
 
-    dbCon.updateUser(sql);
-    return false;
+    String sql =
+            "UPDATE user SET first_name = '" + user.getFirstname() + "', last_name ='" + user.getLastname()
+                    + "', password = '" + hashing.md5(user.getPassword()) + "', email ='" + user.getEmail()
+                    + "' WHERE id = " + jwt.getClaim("userid").asInt();
+
+    return dbCon.updateUser(sql);
   }
-
-
-
 }
 
 

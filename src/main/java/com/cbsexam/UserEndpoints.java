@@ -28,13 +28,13 @@ public class UserEndpoints {
     User user = UserController.getUser(idUser);
 
 
-    // TODO: Add Encryption to JSON : FIX
+    // TODO: Add Encryption to JSON : FIXED
     // Convert the user object to json in order to return the object
     String json = new Gson().toJson(user);
     json = Encryption.encryptDecryptXOR(json);
 
     // Return the user with the status code 200
-    // TODO: What should happen if something breaks down? :FIX
+    // TODO: What should happen if something breaks down? :FIXED
     if (user != null) {
       return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(json).build();
     } else {
@@ -60,7 +60,7 @@ public class UserEndpoints {
     // redigeret her
     ArrayList<User> users = userCache.getUsers(false);
 
-    // TODO: Add Encryption to JSON : FIX
+    // TODO: Add Encryption to JSON : FIXED
     // Transfer users to json in order to return it to the user
     String json = new Gson().toJson(users);
     json = Encryption.encryptDecryptXOR(json);
@@ -92,7 +92,7 @@ public class UserEndpoints {
     }
   }
 
-  // TODO: Make the system able to login users and assign them a token to use throughout the system. : Skal lige testes. muligvis færdg
+  // TODO: Make the system able to login users and assign them a token to use throughout the system. : FIXED
   @POST
   @Path("/login")
   @Consumes(MediaType.APPLICATION_JSON)
@@ -136,21 +136,27 @@ public class UserEndpoints {
 
   // TODO: Make the system able to update users
   @POST
-  @Path("/update")
+  @Path("/updateUser")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public Response updateUser(String body) {
 
-  public Response updateUser(String token) {
+    User user = new Gson().fromJson(body, User.class);
 
-    if (UserController.updateUser (token)) {
+    // Return the data to the user
+    if (UserController.updateUser(user, user.getToken())) {
 
-    return Response.status(200).entity("Brugeren med id ").build();
+      //Opdatere Cache
+      userCache.getUsers(true);
 
-  } else {
-
-    return Response.status(400).entity(" Oplysningerne kunne ikke opdateres").build();
-
+      // Return a response with status 200 and JSON as type
+      return Response.status(200).entity("Bruger er updateret i systemet").build();
+    } else {
+      // Return a response with status 200 and JSON as type
+      return Response.status(400).entity("Brugeren kan ikke findes i systemet").build();
+    }
   }
 }
-}
+
 
 
 
