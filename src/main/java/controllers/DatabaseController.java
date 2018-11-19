@@ -116,8 +116,8 @@ public class DatabaseController {
       connection = getConnection();
 
     try {
-      PreparedStatement statement = connection.prepareStatement(sql);
-      statement.executeUpdate();
+      PreparedStatement deleteUser = connection.prepareStatement(sql);
+      deleteUser.executeUpdate();
       return true;
 
     } catch (SQLException e) {
@@ -132,8 +132,8 @@ public class DatabaseController {
       connection = getConnection();
 
     try {
-      PreparedStatement statement = connection.prepareStatement(sql);
-      statement.executeUpdate();
+      PreparedStatement login = connection.prepareStatement(sql);
+      login.executeUpdate();
 
     } catch (SQLException e) {
       System.out.println(e.getMessage());
@@ -147,8 +147,8 @@ public class DatabaseController {
       connection = getConnection();
 
     try {
-      PreparedStatement statement = connection.prepareStatement(sql);
-      statement.executeUpdate();
+      PreparedStatement updateUser = connection.prepareStatement(sql);
+      updateUser.executeUpdate();
       return true;
 
     } catch (SQLException ex) {

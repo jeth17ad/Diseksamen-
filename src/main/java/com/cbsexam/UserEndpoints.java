@@ -134,7 +134,7 @@ public class UserEndpoints {
 
   }
 
-  // TODO: Make the system able to update users
+  // TODO: Make the system able to update users : FIXED :-D
   @POST
   @Path("/updateUser")
   @Consumes(MediaType.APPLICATION_JSON)
