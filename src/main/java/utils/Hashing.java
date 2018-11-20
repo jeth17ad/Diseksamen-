@@ -3,6 +3,8 @@ package utils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
 import org.bouncycastle.util.encoders.Hex;
 
 public final class Hashing {
@@ -10,8 +12,8 @@ public final class Hashing {
 
   // TODO: You should add a salt and make this secure : FIXED
   public static String md5(String rawString) {
-    try {
 
+    try {
       // We load the hashing algoritm we wish to use.
       MessageDigest md = MessageDigest.getInstance("MD5");
       rawString = rawString + "random";
@@ -61,4 +63,5 @@ public final class Hashing {
 
     return rawString;
   }
-}
+
+  }

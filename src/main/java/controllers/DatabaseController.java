@@ -110,8 +110,14 @@ public class DatabaseController {
     // Return the resultset which at this point will be null
     return result;
   }
+}
 
-  public boolean deleteUser(String sql) {
+
+// nedenstående er udkommenteret da vi nu bruger den samme metode til at kalde med nemlig insert metoden.
+
+  // de tre metoder nedenunder ligner meget hinanden, kan vi få det lavet som en metode, istedet for at have 3 metoder.
+
+ /* public boolean deleteUser(String sql) {
     if (connection == null)
       connection = getConnection();
 
@@ -139,6 +145,7 @@ public class DatabaseController {
       System.out.println(e.getMessage());
     }
   }
+}
 
   //Opretter UpdateUser her
   public boolean updateUser(String sql) {
@@ -158,4 +165,4 @@ public class DatabaseController {
 
   }
 }
-
+*/

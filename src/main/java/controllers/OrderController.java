@@ -27,6 +27,9 @@ public class OrderController {
         }
 
         // Build SQL string to query
+
+        // her skal vi have vores user og adress ind i vores queries
+
         String sql = "SELECT * FROM orders where id=" + id;
 
         // Do the query in the database and create an empty object for the results
