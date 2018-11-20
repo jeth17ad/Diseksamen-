@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import model.Product;
 import utils.Config;
 
+// husk at snak om salt i opgaven at man kunne gemme den et sikre sted.
+
 public class ProductCache {
 
   // List of products
