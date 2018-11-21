@@ -81,6 +81,9 @@ public class OrderController {
             dbCon = new DatabaseController();
         }
 
+
+        // vi skal tilføje User og Adress ind her.
+
         String sql = "SELECT * FROM orders";
 
         ResultSet rs = dbCon.query(sql);
@@ -181,6 +184,7 @@ public class OrderController {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             try {
+                // rollback er når databasen skal sende noget retur.
                 connection.rollback();
                 System.out.println("Rollback");
             } catch (SQLException e1) {

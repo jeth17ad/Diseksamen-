@@ -179,6 +179,9 @@ public class UserController {
 
     // Actually do the query
     ResultSet resultSet = dbCon.query(sql);
+
+    //deklerer den uden nogen værdi
+
     User userlogin;
     String token = null;
 
@@ -204,7 +207,7 @@ public class UserController {
             //Invalid Signing configuration / Couldn't convert Claims.
             System.out.println(exception.getMessage());
           } finally {
-            return token;
+            return token ;
           }
         }
       } else {
