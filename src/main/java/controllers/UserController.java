@@ -245,7 +245,7 @@ public class UserController {
 
     String sql =
             "UPDATE user SET first_name = '" + user.getFirstname() + "', last_name ='" + user.getLastname()
-                    + "', password = '" + hashing.md5(user.getPassword()) + "', email ='" + user.getEmail()
+                    + "', password = '" + hashing.sha(user.getPassword()) + "', email ='" + user.getEmail()
                     + "' WHERE id = " + jwt.getClaim("userid").asInt();
 
     return 1 == dbCon.insert(sql);
