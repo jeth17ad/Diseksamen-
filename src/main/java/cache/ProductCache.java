@@ -18,9 +18,11 @@ public class ProductCache {
   // Sets when the cache has been created
   private long created;
 
+  // Kalder til vores ttl metode i config klassen.
   public ProductCache() {
     this.ttl = Config.getProductTtl();
   }
+
 
   public ArrayList<Product> getProducts(Boolean forceUpdate) {
 
@@ -40,7 +42,7 @@ public class ProductCache {
       // Set products for the instance and set created timestamp
       this.products = products;
       this.created = System.currentTimeMillis() / 1000L;
-     //tester om cachen bliver brugt
+     //tester om cachen bliver brugt -- ville programmet udskrive det nedenstående mere end en gang bliver cachen ikke brugt.
       System.out.println("cache is not used");
     }
 

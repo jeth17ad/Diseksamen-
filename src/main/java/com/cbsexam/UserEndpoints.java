@@ -12,6 +12,8 @@ import model.User;
 import utils.Encryption;
 import utils.Log;
 
+
+
 @Path("user")
 public class UserEndpoints {
 
@@ -36,6 +38,7 @@ public class UserEndpoints {
     // Return the user with the status code 200
     // TODO: What should happen if something breaks down? :FIXED
     if (user != null) {
+      // returner en 200 hvis det er en sy
       return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(json).build();
     } else {
       return Response.status(400).entity("Could not create user").build();
@@ -70,7 +73,7 @@ public class UserEndpoints {
   }
 
   @POST
-  @Path("create/{create}")
+  @Path("/create")
   @Consumes(MediaType.APPLICATION_JSON)
   public Response createUser(String body) {
 
@@ -123,11 +126,11 @@ public class UserEndpoints {
     User user = new Gson().fromJson(body, User.class);
 
     // Return the data to the user
-    if (UserController.deleteUser(user.getToken())) {
+    // Return a response with status 200 and JSON as type
+    if (UserController.deleteUser(user.getToken()))
 
-      // Return a response with status 200 and JSON as type
       return Response.status(200).entity("Bruger er slettet fra systemet").build();
-    } else {
+    else {
       // Return a response with status 200 and JSON as type
       return Response.status(400).entity("Brugeren kan ikke findes i systemet").build();
     }

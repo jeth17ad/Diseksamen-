@@ -8,6 +8,8 @@ import utils.Config;
 
 import java.util.ArrayList;
 
+// vores cache er bygget op på samme måde som usercache da den var bygget på forhånd.
+
 //TODO: Build this cache and use it. :FIXED
 public class OrderCache {
 
@@ -20,6 +22,7 @@ public class OrderCache {
     // Sets when the cache has been created
     private long created;
 
+    // referer til ttl metoden i config klassen som kaldes getOrderttl.
     public OrderCache() {
         this.ttl = Config.getOrderTtl();
     }
@@ -30,6 +33,8 @@ public class OrderCache {
         // Otherwise we look at the age of the cache and figure out if we should update.
         // If the list is empty we also check for new products
         if (forceUpdate
+
+                // created time skal være mindre end currenttimemillis for at den skal opdatere.
                 || ((this.created + this.ttl) <= (System.currentTimeMillis() / 1000L))
                 || this.orders.isEmpty()) {
 

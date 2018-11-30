@@ -21,6 +21,9 @@ public final class Config {
   private static int SOLR_PORT;
   private static String SOLR_PATH;
   private static String SOLR_CORE;
+
+  // alle nedenstående er er nogle vi selv har tilføjet til config klassen.
+
   private static long PRODUCT_TTL;
   private static long ORDER_TTL;
   private static long USER_TTL;
@@ -28,6 +31,7 @@ public final class Config {
   private static String SALT_KEY;
 
 
+// alt til og med getencryptionkey er tilføjet
 
   public static String getSaltKey(){return SALT_KEY.toString();}
 
@@ -117,11 +121,13 @@ public final class Config {
     SOLR_PORT = Integer.parseInt(json.get("SOLR_PORT").toString().replace("\"", ""));
     SOLR_PATH = json.get("SOLR_PATH").toString().replace("\"", "");
     SOLR_CORE = json.get("SOLR_CORE").toString().replace("\"", "");
+    // alt nedenstående kode er tilføjet.
     PRODUCT_TTL = json.get("PRODUCT_TTL").getAsLong();
     ORDER_TTL = json.get("ORDER_TTL").getAsLong();
     USER_TTL = json.get("USER_TTL").getAsLong();
     ENCRYPTION_KEY = json.get("ENCRYPTION_KEY").getAsString();
     SALT_KEY = json.get("SALT_KEY").getAsString();
+
 
   }
 }

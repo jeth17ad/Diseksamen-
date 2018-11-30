@@ -7,7 +7,6 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import model.User;
-import sun.jvm.hotspot.code.Location;
 import utils.Hashing;
 import utils.Log;
 
@@ -23,6 +22,8 @@ public class UserController {
     dbCon = new DatabaseController();
   }
 
+
+  // skal id være token her??
   public static User getUser(int id) {
 
     // Check for connection
@@ -123,7 +124,7 @@ public class UserController {
                     + "', '"
                     + user.getLastname()
                     + "', '"
-                    + Hashing.md5(user.getPassword())
+                    + Hashing.sha(user.getPassword())
                     + "', '"
                     + user.getEmail()
                     + "', "
@@ -160,9 +161,9 @@ public class UserController {
       //Invalid signature/claims
     }
 
-     String sql = "DELETE FROM user WHERE id = " + jwt.getClaim("userid").asInt();
+    String sql = "DELETE FROM user WHERE id = " + jwt.getClaim("userid").asInt();
 
-    return 1 == dbCon.insert(sql);
+    return dbCon.insert(sql)== 1 ;
 
   }
 

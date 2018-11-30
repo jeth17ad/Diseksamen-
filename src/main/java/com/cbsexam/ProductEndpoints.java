@@ -45,7 +45,8 @@ public class ProductEndpoints {
   public Response getProducts() {
 
     // Call our controller-layer in order to get the order from the DB
-    //her bliver den nye cachemetode så anvendt
+
+    //her bliver den nye cachemetode så anvendt - altså den nyoprettede productcache.
     ArrayList<Product> products = productCache.getProducts(false);
 
     // TODO: Add Encryption to JSON : FIXED
@@ -76,7 +77,7 @@ public class ProductEndpoints {
       // Return a response with status 200 and JSON as type
       return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(json).build();
     } else {
-      return Response.status(400).entity("Could not create user").build();
+      return Response.status(400).entity("Could not create product").build();
     }
   }
 }

@@ -37,7 +37,6 @@ public class OrderEndpoints {
     return Response.status(200).type(MediaType.APPLICATION_JSON).entity(json).build();
   }
 //metoden ordercache laves her
-
   public static OrderCache orderCache = new OrderCache();
 
   /** @return Responses */
@@ -56,9 +55,9 @@ public class OrderEndpoints {
     // Return a response with status 200 and JSON as type
     return Response.status(200).type(MediaType.TEXT_PLAIN_TYPE).entity(json).build();
   }
-
+// post står får hvad vi skal bruge når vi skal teste, her kan man vælge get og post.
   @POST
-  @Path("/")
+  @Path("createOrder/")
   @Consumes(MediaType.APPLICATION_JSON)
   public Response createOrder(String body) {
 
@@ -74,6 +73,8 @@ public class OrderEndpoints {
     // Return the data to the user
     if (createdOrder != null) {
       // Return a response with status 200 and JSON as type
+
+      // vi har tilføjet en status 200, som er vores successkritere.
       return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(json).build();
     } else {
 
