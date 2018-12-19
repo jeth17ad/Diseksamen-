@@ -152,7 +152,7 @@ public class UserEndpoints {
       userCache.getUsers(true);
 
       // Return a response with status 200 and JSON as type
-      return Response.status(200).entity("Bruger er updateret i systemet").build();
+      return Response.status(200).entity("Brugerens oplysninger er opdateret").build();
     } else {
       // Return a response with status 200 and JSON as type
       return Response.status(400).entity("Brugeren kan ikke findes i systemet").build();

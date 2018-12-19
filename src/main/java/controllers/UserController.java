@@ -234,6 +234,7 @@ public class UserController {
     }
 
     DecodedJWT jwt = null;
+
     try {
       Algorithm algorithm = Algorithm.HMAC256("secret");
       JWTVerifier verifier = JWT.require(algorithm)
@@ -242,7 +243,8 @@ public class UserController {
       jwt = verifier.verify(token);
     } catch (JWTVerificationException exception) {
       //Invalid signature/claims
-    }
+
+    System.out.println(exception.getMessage());}
 
     String sql =
             "UPDATE user SET first_name = '" + user.getFirstname() + "', last_name ='" + user.getLastname()
