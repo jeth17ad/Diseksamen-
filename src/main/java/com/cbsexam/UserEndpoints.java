@@ -148,7 +148,7 @@ public class UserEndpoints {
     // Return the data to the user
     if (UserController.updateUser(user, user.getToken())) {
 
-      //Opdatere Cache
+      //Opdaterer Cache efter at user i databasen er blevet opdateres
       userCache.getUsers(true);
 
       // Return a response with status 200 and JSON as type

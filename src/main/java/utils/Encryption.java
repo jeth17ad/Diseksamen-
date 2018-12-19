@@ -16,7 +16,7 @@ public final class Encryption {
       StringBuilder thisIsEncrypted = new StringBuilder();
 
       // binary tabel er XOR.
-      // TODO: This is where the magic of XOR is happening. Are you able to explain what is going on?
+      // TODO: This is where the magic of XOR is happening. Are you able to explain what is going on? :fixed
       for (int i = 0; i < rawString.length(); i++) {
         thisIsEncrypted.append((char) (rawString.charAt(i) ^ key[i % key.length]));
       }

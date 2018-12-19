@@ -1,0 +1,16 @@
+#login 
+
+http://18.219.39.37:8080/cbsexam_war/user/login POST {"id": 14, "firstname":He434nrik","lastname": Thorn, "email": "henrik@abc.dk", "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"}
+
+# GET user 
+http://18.219.39.37:8080/cbsexam_war/user/14
+
+#GET products 
+http://18.219.39.37:8080/cbsexam_war/product 
+
+# UPDATE user 
+http://18.219.39.37:8080/cbsexam_war/user/update POST {"id": 14, "firstname": "He434nrik","lastname": "Thorn, "email": "henrik@abc.dk", "password": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad", createdTime":0,
+"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhdXRoMCIsInVzZXJpZCI6N30.zA-YvVpLUGDmVl0H_4LlLVEjPpI7NQaLNvwxooCYMn4"
+
+#Review
+http://18.219.39.37:8080/cbsexam_war/search/title/api

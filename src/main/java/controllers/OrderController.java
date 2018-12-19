@@ -145,7 +145,7 @@ public class OrderController {
 
         //Sætte den til null før man kan sætte til false/true
         Connection connection = dbCon.getConnection();
-        // TODO: Enable transactions in order for us to not save the order if somethings fails for some of the other inserts.
+        // TODO: Enable transactions in order for us to not save the order if somethings fails for some of the other inserts. :fixed
         try {
             connection.setAutoCommit(false);
             // Insert the product in the DB

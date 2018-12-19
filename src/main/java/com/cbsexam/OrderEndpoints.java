@@ -37,6 +37,8 @@ public class OrderEndpoints {
     // Return a response with status 200 and JSON as type
     return Response.status(200).type(MediaType.APPLICATION_JSON).entity(json).build();
   }
+
+
 //metoden ordercache laves her
   public static OrderCache orderCache = new OrderCache();
 

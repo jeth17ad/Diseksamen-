@@ -154,7 +154,8 @@ public class UserController {
     try {
       Algorithm algorithm = Algorithm.HMAC256("secret");
       JWTVerifier verifier = JWT.require(algorithm)
-              .withIssuer("auth0")
+              //cbsexam skriver vi da det er dem der udsteder token.
+              .withIssuer("cbsexam")
               .build(); //Reusable verifier instance
       jwt = verifier.verify(token);
     } catch (JWTVerificationException exception) {
@@ -202,7 +203,7 @@ public class UserController {
             Algorithm algorithm = Algorithm.HMAC256("secret");
             token = JWT.create()
                     .withClaim("userid", userlogin.getId())
-                    .withIssuer("auth0")
+                    .withIssuer("cbsexam")
                     .sign(algorithm);
           } catch (JWTCreationException exception) {
             //Invalid Signing configuration / Couldn't convert Claims.
@@ -236,7 +237,7 @@ public class UserController {
     try {
       Algorithm algorithm = Algorithm.HMAC256("secret");
       JWTVerifier verifier = JWT.require(algorithm)
-              .withIssuer("auth0")
+              .withIssuer("cbsexam")
               .build(); //Reusable verifier instance
       jwt = verifier.verify(token);
     } catch (JWTVerificationException exception) {

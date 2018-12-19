@@ -1,0 +1,37 @@
+#get for user 
+
+http://18.191.137.27.8080/cbsexam_war/user
+http://18.191.137.27.8080/cbsexam_war/user/20
+http://18.191.137.27.8080/cbsexam_war/user/21
+http://18.191.137.27.8080/cbsexam_war/user/22
+http://18.191.137.27.8080/cbsexam_war/user/24
+http://18.191.137.27.8080/cbsexam_war/user/26
+http://18.191.137.27.8080/cbsexam_war/user/27 
+http://18.191.137.27.8080/cbsexam_war/user/33
+http://18.191.137.27.8080/cbsexam_war/user/35
+http://18.191.137.27.8080/cbsexam_war/user/37
+
+#get for product 
+
+http://18.191.137.27.8080/cbsexam_war/product 
+http://18.191.137.27.8080/cbsexam_war/product/1
+http://18.191.137.27.8080/cbsexam_war/product/2
+
+#get for order 
+
+http://18.191.137.27.8080/cbsexam_war/order   
+http://18.191.137.27.8080/cbsexam_war/order/1
+http://18.191.137.27.8080/cbsexam_war/order/2
+http://18.191.137.27.8080/cbsexam_war/order/3
+http://18.191.137.27.8080/cbsexam_war/order/4
+http://18.191.137.27.8080/cbsexam_war/order/5
+
+#get for review 
+
+http://18.191.137.27.8080/cbsexam_war/search/title/itse
+http://18.191.137.27.8080/cbsexam_war/search/title/api
+http://18.191.137.27.8080/cbsexam_war/search/title/kaco
+http://18.191.137.27.8080/cbsexam_war/search/title/noksoala
+
+Post for user 
+http://18.191.137.27.8080/cbsexam_war/user POST{"firstname" : "He434nrik", "lastname": "Thorn", "email": "henrik@abc.dk", "password":"abc"}
