@@ -20,8 +20,8 @@ public class UserCache {
 
     // Sets when the cache has been created
     private long created;
-// nedenstående er blevet erklæret i vores config klasse
 
+// nedenstående er blevet kaldt i vores config fil
     public UserCache() {
         this.ttl = Config.getUserTtl();
     }
@@ -41,8 +41,6 @@ public class UserCache {
             // Set products for the instance and set created timestamp
             this.users = users;
             this.created = System.currentTimeMillis() / 1000L;
-            //tester om cachen bliver brugt -- cache må kun udskrive en gang da den skal køre mindst en gang, udskrives den fleregange er den ikke anvendt.
-            System.out.println("cache is not used");
         }
 
         // Return the documents

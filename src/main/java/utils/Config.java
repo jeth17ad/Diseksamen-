@@ -46,6 +46,7 @@ public final class Config {
   }
 
   // her laver vi vores vores string om til char
+
   public static char[] getEncrytionKey(){return ENCRYPTION_KEY.toCharArray();}
 
   public static String getDatabaseHost() {

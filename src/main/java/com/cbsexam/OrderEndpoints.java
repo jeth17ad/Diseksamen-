@@ -39,8 +39,8 @@ public class OrderEndpoints {
   }
 
 
-//metoden ordercache laves her
-  public static OrderCache orderCache = new OrderCache();
+//opretter et object af OrderCache som vi kalder orderCache.
+  static OrderCache orderCache = new OrderCache();
 
   /** @return Responses */
   @GET
@@ -48,11 +48,13 @@ public class OrderEndpoints {
   public Response getOrders() {
 
     // Call our controller-layer in order to get the order from the DB
-    ArrayList<Order> orders = OrderController.getOrders();
+    ArrayList<Order> orders = orderCache.getOrders(false);
 
     // TODO: Add Encryption to JSON :FIXED
     // We convert the java object to json with GSON library imported in Maven
     String json = new Gson().toJson(orders);
+
+    //encryprion bliver tilføjet til json.
     json = Encryption.encryptDecryptXOR(json);
 
     // Return a response with status 200 and JSON as type

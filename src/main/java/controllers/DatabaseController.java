@@ -33,7 +33,9 @@ public class DatabaseController {
                       + Config.getDatabaseName()
                       + "?serverTimezone=CET";
 
+      //requester databasen om brugens username.
       String user = Config.getDatabaseUsername();
+      //requester databasen om brugerens password.
       String password = Config.getDatabasePassword();
 
       // Register the driver in order to use it
@@ -73,6 +75,9 @@ public class DatabaseController {
 
       // Return the results
       return rs;
+
+      //hvis der er en execption, printer programmet fejlen ud.
+
     } catch (SQLException e) {
       System.out.println(e.getMessage());
     }

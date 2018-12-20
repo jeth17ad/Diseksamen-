@@ -33,6 +33,7 @@ public class UserEndpoints {
     // TODO: Add Encryption to JSON : FIXED
     // Convert the user object to json in order to return the object
     String json = new Gson().toJson(user);
+    //encryprion bliver tilføjet til json.
     json = Encryption.encryptDecryptXOR(json);
 
     // Return the user with the status code 200
@@ -45,8 +46,9 @@ public class UserEndpoints {
     }
   }
 
-  // kalder metoden userCache
-  private static UserCache userCache = new UserCache();
+  // opretter et object af UserCache og kalder den userCache
+  //skal være static da den kun skal hentes en gang.
+ static UserCache userCache = new UserCache();
 
   /**
    * @return Responses
@@ -66,6 +68,8 @@ public class UserEndpoints {
     // TODO: Add Encryption to JSON : FIXED
     // Transfer users to json in order to return it to the user
     String json = new Gson().toJson(users);
+
+    //encryprion bliver tilføjet til json.
     json = Encryption.encryptDecryptXOR(json);
 
     // Return the users with the status code 200
@@ -110,6 +114,7 @@ public class UserEndpoints {
 
     /// Return the data to the user
     if (token != "") {
+
       // Return a response with status 200 and JSON as type
       return Response.status(200).type(MediaType.APPLICATION_JSON_TYPE).entity(token).build();
     } else {

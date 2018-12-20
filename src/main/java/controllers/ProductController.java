@@ -87,7 +87,6 @@ public class ProductController {
 
     return product;
   }
-public static ProductCache productCache = new ProductCache();
   /**
    * Get all products in database
    *
@@ -100,9 +99,13 @@ public static ProductCache productCache = new ProductCache();
     }
 
     // TODO: Use caching layer. :FIXED
+
+    //er ændret og placeret i mit productEndpoint.
     String sql = "SELECT * FROM product";
 
+    //resultset er en tabel der indeholder produkter i dette tilfælde i databasen.
     ResultSet rs = dbCon.query(sql);
+
     ArrayList<Product> products = new ArrayList<Product>();
 
     try {

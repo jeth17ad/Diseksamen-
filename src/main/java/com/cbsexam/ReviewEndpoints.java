@@ -27,6 +27,7 @@ public class ReviewEndpoints {
     // TODO: Add Encryption to JSON : FIXED
     // We convert the java object to json with GSON library imported in Maven
     String json = new Gson().toJson(reviews);
+
     // encryprion bliver tilføjet til json.
     json = Encryption.encryptDecryptXOR(json);
 

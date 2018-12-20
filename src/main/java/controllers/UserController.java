@@ -124,6 +124,7 @@ public class UserController {
                     + "', '"
                     + user.getLastname()
                     + "', '"
+                    //implementerer min hashmetode Sha, og tilføjer den til slutbrugernes passwords.
                     + Hashing.sha(user.getPassword())
                     + "', '"
                     + user.getEmail()
@@ -152,6 +153,7 @@ public class UserController {
 
     DecodedJWT jwt = null;
     try {
+      // denne algorimte bruger secret til at låse brugeren til sit token.
       Algorithm algorithm = Algorithm.HMAC256("secret");
       JWTVerifier verifier = JWT.require(algorithm)
               //cbsexam skriver vi da det er dem der udsteder token.

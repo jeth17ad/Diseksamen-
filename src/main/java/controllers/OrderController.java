@@ -28,7 +28,7 @@ public class OrderController {
 
         // Build SQL string to query
 
-        // her skal vi have vores user og adress ind i vores queries
+        // her skal vi have vores user og adress ind i vores queries ved evt. forbedring.
 
         String sql = "SELECT * FROM orders where id=" + id;
 
@@ -83,7 +83,6 @@ public class OrderController {
 
 
         // vi skal tilføje User og Adress ind her.
-
         String sql = "SELECT * FROM orders";
 
         ResultSet rs = dbCon.query(sql);
@@ -145,6 +144,7 @@ public class OrderController {
 
         //Sætte den til null før man kan sætte til false/true
         Connection connection = dbCon.getConnection();
+
         // TODO: Enable transactions in order for us to not save the order if somethings fails for some of the other inserts. :fixed
         try {
             connection.setAutoCommit(false);
